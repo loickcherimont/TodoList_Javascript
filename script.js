@@ -4,6 +4,7 @@ import { configCheckboxes, displayToUser, filterTasks } from "./functions/functi
 
 
 /**
+ * @todo Implement OOP in our code
  * @todo Fix display of current todolist
  * @todo Fix filter problem
  */
