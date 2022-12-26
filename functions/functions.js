@@ -1,4 +1,4 @@
-import { createNewElement } from "./dom"
+import { createNewElement } from "./dom.js"
 
 /**
  * Display task in function of selected filter
