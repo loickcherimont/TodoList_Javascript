@@ -112,14 +112,4 @@ export function createNewElement(tagName, attributes={}, innerContent='') {
 }
 */
 
-// SONGs FOR 2023
-
-/*
-
-Tobu - If I Disappear (ft. Tom Mårtensson) [NCS Release]
-Tisoki & Cajama - Feelings
-James Roche - Away [NCS Release]
-Andromedik & Used - Take Me [NCS Release]
- */
-
 
