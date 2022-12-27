@@ -9,13 +9,13 @@ import { configCheckboxes, displayToUser, filterTasks } from "./functions/functi
  * @todo Fix filter problem
  */
 try {
-    const todos = await fetchJSON('https://jsonplaceholder.typicode.com/todos?_limit=5')
+    // const todos = await fetchJSON('https://jsonplaceholder.typicode.com/todos?_limit=5')
 
     // Select todolist place
-    const todoList = document.querySelector('.list-group')
+    // const todoList = document.querySelector('.list-group')
 
     // Default todolist 
-    displayToUser(todos, todoList)
+    // displayToUser(todos, todoList)
 
     const addTaskButton = document.querySelector('#addTaskButton')
     const newTask = document.querySelector('#newTask')
@@ -70,7 +70,7 @@ try {
     // Display user error message 
     // If data cannot be downloaded
     const alertElement = createNewElement('div', {class: 'alert alert-danger m-2', role: 'alert'}, 'Server connection failed : Not possible to download elements!')
-    document.body.prepend(alertElement)
+    document.body.prepend(alertElement);
 
-    console.error(e)
+    console.error(e);
 }
