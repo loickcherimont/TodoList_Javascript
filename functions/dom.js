@@ -10,10 +10,10 @@ export function createNewElement(tagName, attributes={}, innerContent='') {
     newElement.innerHTML = innerContent
 
     for(const [attribute, value] of Object.entries(attributes)) {
-        if(value !== false) {
-            newElement.setAttribute(attribute, value)
+        if(value !== null) {
+            newElement.setAttribute(attribute, value);
         }
     }
 
-    return newElement
+    return newElement;
 }
