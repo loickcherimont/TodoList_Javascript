@@ -1,25 +1,43 @@
 import { fetchJSON } from "../functions/api.js";
 import { createNewElement } from "../functions/dom.js";
+// import { configCheckboxes } from "../functions/functions.js";
 
-/**
- * A thing to do or done by user
- * 
- * @typedef  {object} Todo
- * @property {number} id
- * @property {string} description - Task description
- * @property {boolean} state - Task done or not
- * 
- */
-class Todo {
-    constructor(id, description, state) {
-        this.id = id;
-        this.description = description;
-        this.state = state;
+// Input text that allow user add task to the list
+class Form {
+    constructor(form) {
+        this.form = form;
+        this.inputText = form.inputText;
+        this.submitButton = form.submitButton;
+    }
+}
+
+// HTMLElement type Checkbox
+class Checkbox {
+    constructor(checkbox) {
+        this.checkbox = checkbox;
     }
 
-    delete() {
-        // remove the task from todolist
+    get isChecked() {
+        return this.checkbox.checked;
     }
+
+    allowStateChange() {
+        this.checkbox.onchange = (e) => {
+            e.preventDefault();
+            if (this.isChecked) {
+                e.currentTarget.parentElement.classList.add('is-completed');
+            } else {
+                e.currentTarget.parentElement.classList.remove('is-completed');
+            }
+        }
+    }
+
+    // displayChecked() {
+    //     if (this.isChecked) {
+    //         // taskElement.classList.add('is-completed')
+    //         console.log(this);
+    //     }
+    // }
 }
 
 // HTMLElement > All components from TODO (Checkbox, description, trash, id)
@@ -35,7 +53,7 @@ class Todo {
  * 
  * @typedef {object} TodoList
  * 
- * @method display - Display data on todolist mode
+ * @method displayTodolist - Display data on todolist mode
  * @property {Promise<string>} todos - All task to do / done
  */
 class TodoList {
@@ -43,41 +61,56 @@ class TodoList {
         this.todos = todos;
     }
 
-    display() {
+    displayTodolist() {
         const todos = this.todos;
         // Display data on todolist mode
-        for(const todo of todos) {
+        for (const todo of todos) {
+            // console.log(todo);
             let taskID = Date.now();
-            const taskElement = createNewElement('li', {class:  "todo list-group-item d-flex align-items-center"});
-            const checkboxElement = createNewElement('input',   {class: "form-check-input", type: "checkbox", id: `todo-${taskID}`});
-            const descriptionElement = createNewElement('label',    {class: "ms-2 form-check-label", for: `todo-${taskID}`}, todo.title);
-            const trashElement = createNewElement('label',  {class: "ms-auto btn btn-danger btn-sm"}, `<i class="bi-trash">
+            const taskElement = createNewElement('li', {class: "todo list-group-item d-flex align-items-center" });
+            const checkboxElement = createNewElement('input', { class: "form-check-input", type: "checkbox", id: `todo-${taskID}`, checked: todo.completed ? '': null});
+
+            // console.log(checkboxElement);
+
+            const descriptionElement = createNewElement('label', { class: "ms-2 form-check-label", for: `todo-${taskID}` }, todo.title);
+            const trashElement = createNewElement('label', { class: "ms-auto btn btn-danger btn-sm" }, `<i class="bi-trash">
          </i>`)
-            
-            // trashElement.addEventListener('click', () => {
-            //     console.log(this.parentNode)
-            // })
 
-            // Configure
-            // configCheckboxes(checkboxElement, taskElement)
+            // Allow to delete a task
+            trashElement.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.currentTarget.parentNode.remove();
+            })
 
-            taskElement.append(checkboxElement)
+            // Configure checkboxes
+            const checkbox = new Checkbox(checkboxElement);
+            // checkbox.displayChecked();
+            checkbox.allowStateChange();
+
+            // console.log(checkbox["checkbox"])
+
+            // Add each component to the taskElement
+            taskElement.append(checkbox.checkbox)
             taskElement.append(descriptionElement)
             taskElement.append(trashElement)
 
-            console.log(taskElement)
-
-            document.querySelector('.list-group').appendChild(taskElement)
+            // Append task to TodoList
+            document.querySelector('.list-group')
+                    .appendChild(taskElement);
         }
     }
 
-    // Another method
+    // Grab user task from FormElement
+    // Format content and add to todolist
+    addTask() {
+        
+    }
 }
 
 const data = await fetchJSON('https://jsonplaceholder.typicode.com/todos?_limit=5');
 
 const myTodolist = new TodoList(data);
-myTodolist.display()
+myTodolist.displayTodolist();
 
 
 
@@ -90,26 +123,3 @@ myTodolist.display()
     <label class="ms-auto btn btn-danger btn-sm trash"><i class="bi-trash"></i></label>
 </li>
 */
-
-/*
-
- * Customise an HTML Element
- * @param {string} tagName 
- * @param {object} attributes
- * @param {string} innerContent
- * @return {HTMLElement}
-export function createNewElement(tagName, attributes={}, innerContent='') {
-    const newElement = document.createElement(tagName)
-    newElement.innerHTML = innerContent
-
-    for(const [attribute, value] of Object.entries(attributes)) {
-        if(value !== false) {
-            newElement.setAttribute(attribute, value)
-        }
-    }
-
-    return newElement
-}
-*/
-
-
