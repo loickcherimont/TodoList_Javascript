@@ -17,47 +17,47 @@ try {
     // Default todolist 
     // displayToUser(todos, todoList)
 
-    const addTaskButton = document.querySelector('#addTaskButton')
-    const newTask = document.querySelector('#newTask')
+    // const addTaskButton = document.querySelector('#addTaskButton')
+    // const newTask = document.querySelector('#newTask')
     
-    addTaskButton.onclick = (e) => {
+    // addTaskButton.onclick = (e) => {
 
-        e.preventDefault()
+    //     e.preventDefault()
 
-        if(!newTask.value) {
-            alert('Please enter a task!')
-            return
-        }
+    //     if(!newTask.value) {
+    //         alert('Please enter a task!')
+    //         return
+    //     }
 
-        let taskID = Date.now()
+    //     let taskID = Date.now()
 
-         const taskElement = createNewElement('li', {class:  "todo list-group-item d-flex align-items-center"})
+    //      const taskElement = createNewElement('li', {class:  "todo list-group-item d-flex align-items-center"})
 
-         const checkboxElement = createNewElement('input',   {class: "form-check-input", type: "checkbox", id:    `todo-${taskID}`})
+    //      const checkboxElement = createNewElement('input',   {class: "form-check-input", type: "checkbox", id:    `todo-${taskID}`})
 
-         const descriptionElement = createNewElement('label',    {class: "ms-2 form-check-label", for: `todo-${taskID}`}, newTask.value)
+    //      const descriptionElement = createNewElement('label',    {class: "ms-2 form-check-label", for: `todo-${taskID}`}, newTask.value)
 
-         const trashElement = createNewElement('label',  {class: "ms-auto btn btn-danger btn-sm"}, `<i class="bi-trash">
-         </i>`)
+    //      const trashElement = createNewElement('label',  {class: "ms-auto btn btn-danger btn-sm"}, `<i class="bi-trash">
+    //      </i>`)
 
-        // Allow user delete task
-      trashElement.addEventListener('click', () => {
-        taskElement.remove()
-      })
+    //     // Allow user delete task
+    //   trashElement.addEventListener('click', () => {
+    //     taskElement.remove()
+    //   })
 
-      configCheckboxes(checkboxElement, taskElement) 
-
-      
-        taskElement.append(checkboxElement)
-        taskElement.append(descriptionElement)
-        taskElement.append(trashElement)
+    //   configCheckboxes(checkboxElement, taskElement) 
 
       
-         todoList.append(taskElement)
+    //     taskElement.append(checkboxElement)
+    //     taskElement.append(descriptionElement)
+    //     taskElement.append(trashElement)
 
-         // Reset form
-         newTask.value = null   
-    }
+      
+    //      todoList.append(taskElement)
+
+    //      // Reset form
+    //      newTask.value = null   
+    // }
 
 
     filterTasks(
