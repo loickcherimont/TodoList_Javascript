@@ -2,15 +2,6 @@ import { fetchJSON } from "../functions/api.js";
 import { createNewElement } from "../functions/dom.js";
 // import { configCheckboxes } from "../functions/functions.js";
 
-// Input text that allow user add task to the list
-class Form {
-    constructor(form) {
-        this.form = form;
-        this.inputText = form.inputText;
-        this.submitButton = form.submitButton;
-    }
-}
-
 // HTMLElement type Checkbox
 class Checkbox {
     constructor(checkbox) {
@@ -31,22 +22,7 @@ class Checkbox {
             }
         }
     }
-
-    // displayChecked() {
-    //     if (this.isChecked) {
-    //         // taskElement.classList.add('is-completed')
-    //         console.log(this);
-    //     }
-    // }
 }
-
-// HTMLElement > All components from TODO (Checkbox, description, trash, id)
-// class TodoComponent {
-//     appendTo(htmlTag) {
-//         this.append(htmlTag)
-//     }
-// }
-
 
 /**
  * Full list of done/to do tasks
@@ -63,14 +39,17 @@ class TodoList {
 
     displayTodolist() {
         const todos = this.todos;
-        // Display data on todolist mode
+
+        // BLOCK
+        // Create Tasks
+        // Display data on UI Elements
+        // Here Todolist
         for (const todo of todos) {
-            // console.log(todo);
+
             let taskID = Date.now();
             const taskElement = createNewElement('li', {class: "todo list-group-item d-flex align-items-center" });
             const checkboxElement = createNewElement('input', { class: "form-check-input", type: "checkbox", id: `todo-${taskID}`, checked: todo.completed ? '': null});
 
-            // console.log(checkboxElement);
 
             const descriptionElement = createNewElement('label', { class: "ms-2 form-check-label", for: `todo-${taskID}` }, todo.title);
             const trashElement = createNewElement('label', { class: "ms-auto btn btn-danger btn-sm" }, `<i class="bi-trash">
@@ -100,17 +79,39 @@ class TodoList {
         }
     }
 
-    // Grab user task from FormElement
-    // Format content and add to todolist
     addTask() {
-        
+        // const formAddTasks = new FormAddTasks(document.getElementById('newTask'));
+        document.getElementById('formAddTasks').reset();
     }
+}
+
+// Form to allow user add new task in todolist
+// We can access to user data from input text
+// This form can be submitted
+class FormAddTasks {
+    constructor(inputForm) {
+        this.inputForm = inputForm;   
+    }
+
+    get inputData() {
+        return this.inputForm.value;
+    }
+
+    // submitData() {
+
+    // }
 }
 
 const data = await fetchJSON('https://jsonplaceholder.typicode.com/todos?_limit=5');
 
 const myTodolist = new TodoList(data);
 myTodolist.displayTodolist();
+
+document.getElementById('formAddTasks').addEventListener('submit', (e) => {
+    e.preventDefault();
+    myTodolist.addTask();
+
+})
 
 
 
