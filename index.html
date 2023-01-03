@@ -5,37 +5,47 @@
     <title>TodoList</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <style>
-        /* Filter TODO is running */
-        .hide-completed .is-completed {
-            display: none!important;
-        }
-        
-        /* Filter DONE is running */
-        .hide-todo .todo:not(.is-completed) {
-            display: none!important;
-        }
-    </style>
 </head>
 <body>
+
     <section class="container pt-5" id="todolist">
-        <form class="d-flex pb-4" id="formAddTasks">
-            <input required="" class="form-control" type="text" placeholder="Acheter des patates..." name="new_task" data-com.bitwarden.browser.user-edited="yes" id="newTask">
-            <button class="btn btn-primary" id="addTaskButton" type="submit">Ajouter</button>
+        <form class="d-flex pb-4">
+            <input required="" class="form-control" type="text" placeholder="Acheter des patates..." name="title" data-com.bitwarden.browser.user-edited="yes">
+            <button class="btn btn-primary" type="submit">Ajouter</button>
         </form>
         <main>
             <div class="btn-group mb-4" role="group">
-                <button type="button" class=" btn btn-outline-primary active" data-filter="all" id="buttonAll">Toutes</button>
-                <button type="button" class=" btn btn-outline-primary" data-filter="todo" id="buttonTodo">A faire</button>
-                <button type="button" class=" btn btn-outline-primary" data-filter="done" id="buttonDone">Faites</button>
+                <button type="button" class=" btn btn-outline-primary active" data-filter="all">Toutes</button>
+                <button type="button" class=" btn btn-outline-primary" data-filter="todo">A faire</button>
+                <button type="button" class=" btn btn-outline-primary" data-filter="done">Faites</button>
             </div>
 
             <ul class="list-group">
-                <!-- Todo list -->
+            <!-- <li class="todo list-group-item d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" id="todo-1">
+                <label class="ms-2 form-check-label" for="todo-1">
+                    Tâche à faire 2
+                </label>
+                <label class="ms-auto btn btn-danger btn-sm">
+                <i class="bi-trash">
+                </i>
+                </label>
+            </li> -->
+
+            <!-- GRAFIKART'S TEMPLATE -->
+            <!-- <li class="todo list-group-item d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" id="todo-2">
+                <label class="ms-2 form-check-label" for="todo-2">
+                    Tâche à faire 1
+                </label>
+                <label class="ms-auto btn btn-danger btn-sm">
+                <i class="bi-trash">
+                </i>
+                </label>
+            </li> -->
             </ul>
         </main>
     </section>
-    <script src="script.js" type="module"></script>
-    <script src="./components/Components.js" type="module"></script>
+    <script src="./script.js" type="module"></script>
 </body>
 </html>
